@@ -1,0 +1,18 @@
+# dependencies and build output
+node_modules/
+dist/
+.astro/
+.wrangler/
+
+# secrets
+.env*
+!.env.example
+
+# business documents with personal data (phones, e-mails of founders): never commit
+docs/private/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
