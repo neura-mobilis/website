@@ -1,0 +1,11 @@
+#!/bin/sh
+# Blocks a commit whose staged changes contain a secret. CI scans again; this catches it before
+# it ever enters history. Enable once per clone: git config core.hooksPath .githooks
+set -e
+root=$(git rev-parse --show-toplevel)
+if ! command -v docker >/dev/null 2>&1; then
+  echo "pre-commit: docker not found, secret scan skipped (CI will still scan)." >&2
+  exit 0
+fi
+docker build --quiet -t gitleaks -f "$root/.github/tools/gitleaks.Dockerfile" "$root/.github/tools" >/dev/null
+docker run --rm -v "$root:/repo" -w /repo gitleaks git --staged --redact --no-banner /repo

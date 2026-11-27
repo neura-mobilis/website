@@ -17,7 +17,8 @@ live in their own repositories or will be added here as separate folders.
 | `docs/company/` | Pitch deck and presentation note (incubator application, Oct 2026) |
 | `docs/decisions/` | Architecture decision records (ADR) |
 | `docs/private/` | Local only, git-ignored: documents containing personal data |
-| `.github/` | CI (build, type check, dependency audit, secret scan) and Dependabot |
+| `.github/` | CI (build, type check, dependency audit, secret scan, PR title), releases, Dependabot |
+| `release-please-config.json` | Versioning and changelog rules (see ADR 0002) |
 
 ## Run the site
 
@@ -33,7 +34,6 @@ bun run build    # static output in site/dist
 
 ## Working rules
 
-- Branch from `main`, open a pull request, CI must be green before merging.
-- Commits: `feat: …`, `fix: …`, `refactor: …`, `docs: …`, `ci: …`, one concern per commit.
+- Workflow, commit titles and releases: [CONTRIBUTING.md](CONTRIBUTING.md).
 - Accessibility target: WCAG 2.2 AA (see `CLAUDE.md`).
 - Security: see [SECURITY.md](SECURITY.md).

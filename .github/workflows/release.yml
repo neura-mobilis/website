@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# The default GITHUB_TOKEN gets no permission: everything goes through the app token below.
+permissions: {}
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    # Environment restricted to main: the app private key is unreachable from branches and PRs.
+    environment: release
+    steps:
+      # Short-lived (1 h) token of the "Neura Mobilis Release" GitHub App, limited to this repo.
+      # PRs opened with it trigger CI like any human PR (GITHUB_TOKEN ones do not).
+      - uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
+        id: app-token
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+          permission-issues: write
+      # Opens or updates a "release PR" (version bump + CHANGELOG) from conventional commits.
+      # Merging that PR creates the git tag (site-vX.Y.Z) and the GitHub Release.
+      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          token: ${{ steps.app-token.outputs.token }}
