@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/neura-mobilis/website/compare/site-v0.2.0...site-v0.3.0) (2026-11-27)
+
+
+### Features
+
+* redesign the site with light and dark themes and an interactive Mobilis demo ([#8](https://github.com/neura-mobilis/website/issues/8)) ([5020285](https://github.com/neura-mobilis/website/commit/5020285a0c160cc40a2a0bb0e45aa68e2fc57606))
+
 ## [0.2.0](https://github.com/neura-mobilis/website/compare/site-v0.1.0...site-v0.2.0) (2026-11-27)
 
 
