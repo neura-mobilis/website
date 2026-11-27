@@ -21,7 +21,7 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
 <header class="site-header">
   <div class="bar">
     <a class="brand" href={routes.home[lang]} aria-label={t.home}>
-      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="currentColor"></rect><path d="M9 23V9l14 14V9" fill="none" stroke="var(--paper)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="var(--accent-strong)"></circle><path d="M10 22V10l12 12V10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       <span>Neura Mobilis</span>
     </a>
     <nav aria-label={t.navLabel}>
@@ -43,15 +43,45 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
         <li>
           <a class="lang" href={switchHref} hreflang={other} lang={other}>{t.switchLabel}</a>
         </li>
+        <li>
+          <button type="button" class="theme" aria-pressed="false" hidden data-theme-toggle>
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg>
+            <span>{t.darkTheme}</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </div>
 </header>
 
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  if (btn) {
+    const root = document.documentElement;
+    const media = matchMedia('(prefers-color-scheme: dark)');
+    const current = () => root.dataset.theme ?? (media.matches ? 'dark' : 'light');
+    const render = () => btn.setAttribute('aria-pressed', String(current() === 'dark'));
+    btn.hidden = false;
+    render();
+    media.addEventListener('change', render);
+    btn.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      render();
+    });
+  }
+</script>
+
 <style>
   .site-header {
+    position: relative;
+    z-index: 5;
     border-bottom: 1px solid var(--line);
-    background: var(--paper);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
   }
   .bar {
     max-width: var(--wide);
@@ -63,14 +93,34 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
     justify-content: space-between;
     gap: 0.5rem 1.5rem;
   }
+  @media (min-width: 52rem) {
+    .site-header {
+      position: sticky;
+      top: 0;
+    }
+  }
+  @media (max-width: 40rem) {
+    .theme span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .theme {
+      padding: 0.3rem 0.65rem;
+    }
+  }
   .brand {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     min-height: 44px;
     color: var(--ink);
-    font-weight: 700;
-    font-size: 1.125rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
     text-decoration: none;
   }
   ul {
@@ -99,5 +149,27 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
   }
   .lang {
     font-size: 0.95rem;
+  }
+  .theme {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .theme[hidden] {
+    display: none;
+  }
+  .theme[aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
   }
 </style>

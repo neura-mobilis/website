@@ -7,6 +7,16 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../dist', import.meta.url));
 const port = Number(process.env.PORT ?? 4321);
 
+// Same security headers as production (public/_headers, '/*' block), so a CSP violation fails the tests.
+const headersFile = Bun.file(join(root, '_headers'));
+const securityHeaders: Record<string, string> = {};
+if (await headersFile.exists()) {
+  for (const line of (await headersFile.text()).split('\n')) {
+    const match = line.match(/^\s+([\w-]+):\s*(.+)$/);
+    if (match) securityHeaders[match[1]] = match[2].trim();
+  }
+}
+
 Bun.serve({
   port,
   async fetch(req: Request) {
@@ -15,7 +25,7 @@ Bun.serve({
     for (const file of candidates) {
       if (!file.startsWith(root)) break;
       const f = Bun.file(file);
-      if (await f.exists()) return new Response(f);
+      if (await f.exists()) return new Response(f, { headers: securityHeaders });
     }
     return new Response('Not found', { status: 404 });
   },

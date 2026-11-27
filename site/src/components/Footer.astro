@@ -25,9 +25,9 @@ const legal = (['legal', 'privacy', 'accessibility'] as const).map((key) => ({ h
 
 <style>
   .site-footer {
-    margin-top: 4rem;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--band);
+    color: var(--band-ink);
+    border-top: 1px solid rgb(255 255 255 / 0.14);
   }
   .inner {
     max-width: var(--wide);
@@ -59,12 +59,12 @@ const legal = (['legal', 'privacy', 'accessibility'] as const).map((key) => ({ h
     padding: 0;
   }
   a {
-    color: var(--paper);
+    color: var(--band-ink);
     display: inline-flex;
     align-items: center;
     min-height: 44px;
   }
   .site-footer :focus-visible {
-    outline-color: var(--accent-light);
+    outline-color: #ffffff;
   }
 </style>
