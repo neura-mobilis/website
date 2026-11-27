@@ -1,6 +1,7 @@
 ---
 import Page from '../layouts/Page.astro';
 import { routes } from '../i18n/routes';
+import PhoneDemo from '../components/PhoneDemo.astro';
 ---
 
 <Page
@@ -23,6 +24,8 @@ import { routes } from '../i18n/routes';
     <li>Mobilis comprend la demande et agit sur le téléphone : ouvrir une application, écrire, appeler, chercher une information.</li>
     <li>Mobilis vous répond à l'oral et vous dit ce qu'il a fait.</li>
   </ol>
+
+  <div class="demo-slot"><PhoneDemo /></div>
 
   <h2>Ce qui le distingue des commandes vocales intégrées</h2>
   <p>
@@ -59,3 +62,13 @@ import { routes } from '../i18n/routes';
     <a class="button" href={routes.tester.fr}>Devenir testeur</a>
   </div>
 </Page>
+
+<style>
+  .demo-slot {
+    margin: 3rem 0;
+    padding: 2.5rem 1rem;
+    border-radius: 2rem;
+    background: var(--surface);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+</style>

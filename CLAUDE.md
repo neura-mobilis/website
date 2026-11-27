@@ -14,7 +14,9 @@ usually cloned next to this one as `../company`. This repo is public: nothing in
 - Accessibility is a hard requirement (users may be tetraplegic, using voice control, switch access
   or screen readers): WCAG 2.2 AA, full keyboard navigation, visible focus, targets ≥ 44 px,
   `prefers-reduced-motion` respected, no information conveyed by color alone, real `<button>`/`<a>`.
+- Visual system and tokens: `DESIGN.md` (light and dark themes, Mobilis button motif). Test both themes.
 - No cookies, no analytics, no third-party embeds without a consent decision first.
+- No inline scripts: the CSP forbids them and the tests serve the production headers.
 - Claims: only what the company documents state. Mobilis is "in testing" on Android; decoding is an idea;
   hardware is long term. Never invent users, partners, results, medical claims or testimonials.
   Mobilis is an accessibility tool, not a medical device: never write medical promises.

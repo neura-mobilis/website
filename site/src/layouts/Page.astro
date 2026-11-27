@@ -14,9 +14,69 @@ const { route, title, heading, description, lead } = Astro.props;
 ---
 
 <Layout route={route} title={title} description={description}>
-  <article class="section prose">
-    <h1>{heading}</h1>
-    {lead && <p class="lead">{lead}</p>}
+  <header class="page-head">
+    <div class="page-head-inner">
+      <h1>{heading}</h1>
+      {lead && <p class="lead">{lead}</p>}
+    </div>
+    <span class="orb" aria-hidden="true"></span>
+  </header>
+  <article class="prose">
     <slot />
   </article>
 </Layout>
+
+<style>
+  .page-head {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+  .page-head-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) var(--gutter) clamp(2.5rem, 6vw, 4rem);
+  }
+  .page-head h1 {
+    max-width: 16ch;
+  }
+  .orb {
+    position: absolute;
+    right: -8rem;
+    top: -6rem;
+    width: 26rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent-strong);
+    opacity: 0.12;
+    box-shadow:
+      0 0 0 3rem color-mix(in srgb, var(--accent-strong) 50%, transparent),
+      0 0 0 6rem color-mix(in srgb, var(--accent-strong) 22%, transparent);
+  }
+  .prose {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+  }
+  .prose :global(h2) {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+  }
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.4rem;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.6rem;
+  }
+  .prose :global(li::marker) {
+    color: var(--accent);
+    font-weight: 800;
+  }
+</style>

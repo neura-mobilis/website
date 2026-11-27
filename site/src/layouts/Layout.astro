@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import { routes, toLocale, type RouteKey } from '../i18n/routes';
 import { ui } from '../i18n/ui';
 import { site } from '../data/site';
+import '@fontsource-variable/atkinson-hyperlegible-next';
 
 interface Props {
   title: string;
@@ -41,7 +42,10 @@ const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
-    <meta name="theme-color" content="#14213d" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef2f8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1322" />
+    <script is:inline src="/theme.js"></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
@@ -59,17 +63,55 @@ const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
 <style is:global>
   :root {
     color-scheme: light;
-    --ink: #14213d;
-    --ink-soft: #3d4a63;
-    --paper: #f6f5f1;
+    --bg: #eef2f8;
     --surface: #ffffff;
-    --line: #d9d7cf;
-    --accent: #177a68;
-    --accent-dark: #0f5c4e;
-    --accent-light: #8fd6c6;
-    --wide: 72rem;
-    --text: 42rem;
-    --gutter: clamp(1rem, 4vw, 2rem);
+    --surface-2: #e3e9f3;
+    --ink: #0f1b33;
+    --ink-soft: #46546d;
+    --line: #d3dbe8;
+    --line-strong: #9aa8bf;
+    --accent: #1b4fa6;
+    --accent-strong: #2160c4;
+    --accent-ink: #ffffff;
+    --halo: radial-gradient(circle, rgb(33 96 196 / 0.16), rgb(33 96 196 / 0.04) 60%, transparent 70%);
+    --band: #10204a;
+    --band-ink: #eef3ff;
+    --wide: 74rem;
+    --text: 40rem;
+    --gutter: clamp(1rem, 4vw, 2.5rem);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      color-scheme: dark;
+      --bg: #0b1322;
+      --surface: #121d33;
+      --surface-2: #17243e;
+      --ink: #e7edf8;
+      --ink-soft: #a9b6cc;
+      --line: #22314f;
+      --line-strong: #4a5d82;
+      --accent: #8db4ff;
+      --accent-strong: #2160c4;
+      --halo: radial-gradient(circle, rgb(80 140 255 / 0.22), rgb(80 140 255 / 0.05) 60%, transparent 70%);
+      --band: #16306e;
+      --band-ink: #eef3ff;
+    }
+  }
+  :root[data-theme='dark'] {
+    color-scheme: dark;
+    --bg: #0b1322;
+    --surface: #121d33;
+    --surface-2: #17243e;
+    --ink: #e7edf8;
+    --ink-soft: #a9b6cc;
+    --line: #22314f;
+    --line-strong: #4a5d82;
+    --accent: #8db4ff;
+    --accent-strong: #2160c4;
+    --halo: radial-gradient(circle, rgb(80 140 255 / 0.22), rgb(80 140 255 / 0.05) 60%, transparent 70%);
+    --band: #16306e;
+    --band-ink: #eef3ff;
   }
   *,
   *::before,
@@ -78,14 +120,20 @@ const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
   }
   html {
     -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--line-strong) var(--bg);
   }
   body {
     margin: 0;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    font-size: 1.0625rem;
-    line-height: 1.65;
+    font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.6;
     color: var(--ink);
-    background: var(--paper);
+    background: var(--bg);
+    caret-color: var(--accent);
+  }
+  ::selection {
+    background: var(--accent-strong);
+    color: #fff;
   }
   main:focus {
     outline: none;
@@ -93,33 +141,49 @@ const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
   h1,
   h2,
   h3 {
-    line-height: 1.2;
+    line-height: 1.12;
     text-wrap: balance;
+    font-weight: 800;
+    letter-spacing: -0.015em;
   }
   h1 {
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    letter-spacing: -0.02em;
-    margin: 0 0 1rem;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem;
   }
   h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
     margin: 0 0 1rem;
   }
   h3 {
-    font-size: 1.2rem;
-    margin: 1.5rem 0 0.5rem;
+    font-size: 1.25rem;
+    margin: 1.75rem 0 0.4rem;
   }
   p,
   li {
     max-width: var(--text);
+    text-wrap: pretty;
   }
   a {
-    color: var(--accent-dark);
-    text-underline-offset: 0.15em;
+    color: var(--accent);
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 0.08em;
+  }
+  a:hover {
+    text-decoration-thickness: 0.14em;
   }
   :focus-visible {
     outline: 3px solid var(--accent);
     outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .skip-link {
     position: absolute;
@@ -127,8 +191,9 @@ const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
     top: -4rem;
     z-index: 10;
     padding: 0.75rem 1rem;
-    background: var(--ink);
-    color: var(--paper);
+    border-radius: 0.5rem;
+    background: var(--accent-strong);
+    color: #fff;
   }
   .skip-link:focus {
     top: 1rem;
@@ -136,41 +201,46 @@ const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
   .section {
     max-width: var(--wide);
     margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter);
+    padding: clamp(3.5rem, 8vw, 6.5rem) var(--gutter);
   }
   .lead {
-    font-size: clamp(1.125rem, 2vw, 1.3rem);
+    font-size: clamp(1.2rem, 2.1vw, 1.45rem);
+    line-height: 1.5;
     color: var(--ink-soft);
   }
   .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 44px;
-    padding: 0.6rem 1.25rem;
-    border-radius: 0.5rem;
-    background: var(--accent-dark);
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    background: var(--accent-strong);
     color: #fff;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
+    transition: background 0.2s var(--ease), transform 0.2s var(--ease);
   }
   .button:hover {
-    background: var(--ink);
+    background: #1a50a8;
+  }
+  .button:active {
+    transform: translateY(1px);
   }
   .button.secondary {
     background: transparent;
     color: var(--ink);
-    border: 2px solid var(--ink);
+    box-shadow: inset 0 0 0 2px var(--line-strong);
   }
   .button.secondary:hover {
-    background: var(--ink);
-    color: var(--paper);
+    box-shadow: inset 0 0 0 2px var(--ink);
   }
   .actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
   .note {
     font-size: 0.95rem;
@@ -180,11 +250,10 @@ const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
     background: var(--surface);
     border-block: 1px solid var(--line);
   }
-  .prose h2 {
-    margin-top: 2.5rem;
-  }
   @media (prefers-reduced-motion: reduce) {
-    * {
+    *,
+    *::before,
+    *::after {
       animation: none !important;
       transition: none !important;
       scroll-behavior: auto !important;
