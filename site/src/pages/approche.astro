@@ -1,0 +1,56 @@
+---
+import Page from '../layouts/Page.astro';
+import { routes } from '../i18n/routes';
+---
+
+<Page
+  route="approach"
+  title="Notre approche : l'IA pour l'autonomie"
+  heading="Notre approche"
+  description="Assistant vocal, décodage non invasif des signaux EEG et EMG, puis matériel de rééducation : les trois étapes de Neura Mobilis."
+  lead="Nous commençons par le logiciel, le plus simple et le plus accessible, avant d'aller vers le matériel. Trois étapes, chacune construite sur la précédente."
+>
+  <h2>1. Mobilis, l'assistant vocal</h2>
+  <p>
+    Comprendre une demande en langage naturel et agir sur le téléphone. C'est ce que nous faisons
+    aujourd'hui, en test. <a href={routes.mobilis.fr}>En savoir plus sur Mobilis</a>.
+  </p>
+
+  <h2>2. Le décodage des signaux</h2>
+  <p>
+    Lorsqu'une personne a l'intention de bouger, son corps émet des signaux, même quand le mouvement ne
+    se fait pas. Nous voulons les capter avec des capteurs non invasifs, sans chirurgie :
+    l'électroencéphalographie (EEG) sur le crâne et l'électromyographie (EMG) sur les muscles. Une IA les
+    interprète et déclenche une action précise : piloter un appareil, ou amplifier le signal pour
+    assister le mouvement.
+  </p>
+  <p>
+    La difficulté est de reconnaître une intention dans un signal bruité et propre à chaque personne.
+    Cette étape est au stade de la recherche : nous commençons sur des jeux de données ouverts.
+  </p>
+
+  <h2>3. Le matériel de rééducation</h2>
+  <p>
+    À terme, ces IA pourront piloter des dispositifs de rééducation, comme un exosquelette de marche ou
+    des stimulateurs posés sur les muscles. Ce matériel serait fourni par un centre médical, qui suit
+    son usage et l'ajuste.
+  </p>
+
+  <h2>Ce que nous nous imposons</h2>
+  <ul>
+    <li>
+      <strong>Les données de santé sont sensibles.</strong> Nous ne collectons que ce que nous avons le droit
+      et le besoin de collecter, et nous l'anonymisons ou le pseudonymisons dès que possible.
+    </li>
+    <li>
+      <strong>Un dispositif médical se certifie.</strong> Un produit qui assiste ou rééduque le mouvement relève
+      du règlement européen sur les dispositifs médicaux. C'est pourquoi nous commençons par Mobilis, un
+      outil d'accessibilité sans finalité médicale.
+    </li>
+    <li>
+      <strong>L'IA reste sous contrôle humain.</strong> Nos systèmes restent toujours sous le contrôle de la
+      personne et de son soignant, comme l'exige le règlement européen sur l'IA pour les usages à haut
+      risque.
+    </li>
+  </ul>
+</Page>

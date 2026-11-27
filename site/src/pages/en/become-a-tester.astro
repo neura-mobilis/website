@@ -1,0 +1,44 @@
+---
+import Page from '../../layouts/Page.astro';
+import { routes } from '../../i18n/routes';
+import { site } from '../../data/site';
+
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Becoming a Mobilis tester')}`;
+---
+
+<Page
+  route="tester"
+  title="Become a Mobilis tester"
+  heading="Become a Mobilis tester"
+  description="Test Mobilis, the voice assistant that operates your Android phone by voice, and help us improve it. For people with spinal cord injuries."
+  lead="We are looking for people living with a spinal cord injury, or who cannot handle their phone, to use Mobilis every day and tell us what works and what gets in the way."
+>
+  <h2>Who can take part</h2>
+  <ul>
+    <li>You live with a spinal cord injury, or another difficulty handling your phone.</li>
+    <li>You have an Android phone. Mobilis is not available on iPhone yet.</li>
+    <li>You can also write to us on behalf of a relative, with their consent.</li>
+  </ul>
+
+  <h2>What it involves</h2>
+  <ol>
+    <li>Installing the test version of Mobilis, with our help if needed.</li>
+    <li>Using it in your daily life.</li>
+    <li>Telling us what works, what bothers you and what is missing.</li>
+  </ol>
+  <p>We explain the terms of the test before you commit to anything. You can stop whenever you like.</p>
+
+  <h2>Write to us</h2>
+  <p>
+    Send us an e-mail with just your first name and your phone model.{' '}
+    <strong>There is no need to describe your health</strong>: we do not need it to answer you.
+  </p>
+  <div class="actions">
+    <a class="button" href={mailto}>E-mail the team</a>
+  </div>
+  <p>Or directly at: <a href={mailto}>{site.email}</a></p>
+  <p class="note">
+    We only use your address to answer you and organise the test.{' '}
+    <a href={routes.privacy.en}>How we handle your data</a>.
+  </p>
+</Page>

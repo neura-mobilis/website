@@ -1,0 +1,54 @@
+---
+import Page from '../../layouts/Page.astro';
+import { routes } from '../../i18n/routes';
+---
+
+<Page
+  route="approach"
+  title="Our approach: AI for autonomy"
+  heading="Our approach"
+  description="A voice assistant, non-invasive EEG and EMG signal decoding, then rehabilitation hardware: the three steps of Neura Mobilis."
+  lead="We start with software, the simplest and most accessible, before moving to hardware. Three steps, each built on the previous one."
+>
+  <h2>1. Mobilis, the voice assistant</h2>
+  <p>
+    Understanding a request in natural language and acting on the phone. This is what we do today, in
+    testing. <a href={routes.mobilis.en}>Learn more about Mobilis</a>.
+  </p>
+
+  <h2>2. Signal decoding</h2>
+  <p>
+    When a person intends to move, their body emits signals, even when the movement does not happen. We
+    want to capture them with non-invasive sensors, without surgery: electroencephalography (EEG) on the
+    scalp and electromyography (EMG) on the muscles. An AI interprets them and triggers a precise action:
+    controlling a device, or amplifying the signal to assist the movement.
+  </p>
+  <p>
+    The challenge is recognising an intention in a noisy signal that differs from one person to the next.
+    This step is at the research stage: we are starting with open datasets.
+  </p>
+
+  <h2>3. Rehabilitation hardware</h2>
+  <p>
+    In time, this AI could drive rehabilitation devices, such as a walking exoskeleton or stimulators
+    placed on the muscles. The hardware would be provided by a medical centre, which monitors and adjusts
+    its use.
+  </p>
+
+  <h2>What we hold ourselves to</h2>
+  <ul>
+    <li>
+      <strong>Health data is sensitive.</strong> We only collect what we are allowed and need to collect, and
+      we anonymise or pseudonymise it as soon as possible.
+    </li>
+    <li>
+      <strong>A medical device must be certified.</strong> A product that assists or rehabilitates movement
+      falls under the EU Medical Device Regulation. That is why we start with Mobilis, an accessibility
+      tool with no medical purpose.
+    </li>
+    <li>
+      <strong>AI stays under human control.</strong> Our systems always remain under the control of the person
+      and their caregiver, as the EU AI Act requires for high-risk uses.
+    </li>
+  </ul>
+</Page>

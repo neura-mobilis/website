@@ -1,13 +1,115 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { routes } from '../../i18n/routes';
+import { site } from '../../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  email: site.email,
+  description: 'Start-up building AI that restores autonomy and mobility to people living with a spinal cord injury.',
+};
 ---
 
 <Layout
-  title="Neura Mobilis: restoring autonomy and mobility with AI"
-  description="Neura Mobilis builds AI that gives people with spinal cord injuries back their autonomy and mobility, starting with Mobilis, a voice assistant to control your phone."
+  route="home"
+  title="Neura Mobilis: control your phone by voice, hands-free"
+  description="Mobilis, by Neura Mobilis, controls your whole phone by voice and answers out loud. Designed for people living with a spinal cord injury."
+  jsonLd={jsonLd}
 >
-  <h1>Neura Mobilis</h1>
-  <p>We give people with spinal cord injuries back their autonomy and mobility, with AI.</p>
-  <p>Website under construction.</p>
-  <p><a href="/" hreflang="fr" lang="fr">Version française</a></p>
+  <section class="section hero">
+    <h1>Your phone, by voice, without having to hold it.</h1>
+    <p class="lead">
+      Neura Mobilis builds AI that gives people living with a spinal cord injury back their autonomy.
+      First step: <strong>Mobilis</strong>, a voice assistant that fully controls the phone and answers
+      out loud.
+    </p>
+    <div class="actions">
+      <a class="button" href={routes.tester.en}>Become a Mobilis tester</a>
+      <a class="button secondary" href={routes.mobilis.en}>Discover Mobilis</a>
+    </div>
+    <p class="note">Mobilis is in testing on Android.</p>
+  </section>
+
+  <section class="band" aria-labelledby="problem">
+    <div class="section">
+      <h2 id="problem">An everyday gesture can require help</h2>
+      <p>
+        In France alone, about 40,000 people live with paraplegia or tetraplegia, at an average age of 28,
+        with about 1,500 new cases every year. When you can no longer hold your phone, reach for it or
+        lean over it, reading a message or making a call often means someone has to be there.
+      </p>
+      <p class="note">Source: French National Assembly, written question no. 43389.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="mobilis">
+    <h2 id="mobilis">What Mobilis does</h2>
+    <ul class="points">
+      <li>
+        <h3>The whole phone, by voice</h3>
+        <p>Open an app, write a message, make a call: you ask, Mobilis does it.</p>
+      </li>
+      <li>
+        <h3>Spoken answers</h3>
+        <p>Mobilis reads the information to you. No need to look at the screen to know what is on it.</p>
+      </li>
+      <li>
+        <h3>Your data stays with you</h3>
+        <p>Most of your data is stored on your phone, not on our servers.</p>
+      </li>
+    </ul>
+    <p><a href={routes.mobilis.en}>How Mobilis works</a></p>
+  </section>
+
+  <section class="band" aria-labelledby="next">
+    <div class="section">
+      <h2 id="next">What comes next</h2>
+      <ol class="steps">
+        <li><strong>Today: Mobilis</strong>, the voice assistant, in testing.</li>
+        <li><strong>Next: signal decoding.</strong> Detecting the intention to move without surgery, with sensors placed on the skin.</li>
+        <li><strong>Later: rehabilitation hardware</strong> driven by this AI, provided and monitored by a medical centre.</li>
+      </ol>
+      <p><a href={routes.approach.en}>Our approach in detail</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tester">
+    <h2 id="tester">Build Mobilis with us</h2>
+    <p>
+      Do you live with a spinal cord injury, or support someone who does? Your feedback decides what we
+      improve first.
+    </p>
+    <div class="actions">
+      <a class="button" href={routes.tester.en}>Become a tester</a>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .hero {
+    padding-top: clamp(3rem, 8vw, 6rem);
+  }
+  .hero h1 {
+    max-width: 18ch;
+  }
+  .points {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: grid;
+    gap: 1rem 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .points h3 {
+    margin-top: 0;
+  }
+  .steps {
+    padding-left: 1.25rem;
+  }
+  .steps li {
+    margin-bottom: 0.75rem;
+  }
+</style>

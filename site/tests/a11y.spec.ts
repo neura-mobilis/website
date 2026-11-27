@@ -1,25 +1,11 @@
-import { readdirSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-// Every built page is tested: a new page is covered without touching this file.
-const distDir = fileURLToPath(new URL('../dist', import.meta.url));
-
-function builtPages(dir: string): string[] {
-  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const path = join(dir, entry.name);
-    if (entry.isDirectory()) return builtPages(path);
-    if (!entry.name.endsWith('.html') || entry.name === '404.html') return [];
-    const route = '/' + relative(distDir, path).split(sep).join('/');
-    return [route.replace(/index\.html$/, '')];
-  });
-}
+import { builtPages } from './pages';
 
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
-for (const route of builtPages(distDir)) {
+for (const route of builtPages()) {
   test.describe(route, () => {
     test('has no WCAG 2.2 A/AA violations', async ({ page }) => {
       await page.goto(route);

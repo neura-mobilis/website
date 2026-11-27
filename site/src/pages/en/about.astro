@@ -1,0 +1,33 @@
+---
+import Page from '../../layouts/Page.astro';
+import { routes } from '../../i18n/routes';
+---
+
+<Page
+  route="about"
+  title="About"
+  heading="About"
+  description="Neura Mobilis, a start-up founded by four AI students, builds AI that restores autonomy and mobility to people with spinal cord injuries."
+  lead="Four artificial intelligence students, equal partners, brought together by one idea: using AI to give people back their autonomy."
+>
+  <h2>Why we do this</h2>
+  <p>
+    A spinal cord injury often affects young people. Thanks to the plasticity of the nervous system,
+    some capacity for recovery remains one to two years after the injury. But state-of-the-art equipment
+    is expensive, rare and available for short sessions, in only a few centres.
+  </p>
+
+  <h2>How we work</h2>
+  <p>
+    We started by listening. The team of a rehabilitation centre, including a physiotherapist, and two
+    people with tetraplegia described their daily life and the limits of current solutions. Mobilis came
+    out of these conversations, and our testers decide what comes next.
+  </p>
+  <p>The project is supported by our school's incubator. The company is being set up.</p>
+
+  <h2>Write to us</h2>
+  <p>
+    To test Mobilis, work with us or simply learn more: <a href={routes.tester.en}>become a tester</a> or
+    write to us at the address at the bottom of the page.
+  </p>
+</Page>

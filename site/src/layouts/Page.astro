@@ -1,0 +1,22 @@
+---
+import Layout from './Layout.astro';
+import type { RouteKey } from '../i18n/routes';
+
+interface Props {
+  route: RouteKey;
+  title: string;
+  heading: string;
+  description: string;
+  lead?: string;
+}
+
+const { route, title, heading, description, lead } = Astro.props;
+---
+
+<Layout route={route} title={title} description={description}>
+  <article class="section prose">
+    <h1>{heading}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </article>
+</Layout>

@@ -1,0 +1,31 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../data/site';
+---
+
+<Page
+  route="accessibility"
+  title="Déclaration d'accessibilité"
+  heading="Déclaration d'accessibilité"
+  description="Engagement d'accessibilité du site Neura Mobilis : objectif WCAG 2.2 niveau AA, tests automatiques et contact pour signaler un problème."
+  lead="Nos utilisateurs naviguent souvent à la voix, au clavier, avec un contacteur ou un lecteur d'écran. L'accessibilité de ce site n'est pas une option."
+>
+  <h2>Notre objectif</h2>
+  <p>
+    Ce site vise la conformité aux règles WCAG 2.2, niveau AA. Il est utilisable entièrement au clavier,
+    respecte la préférence de réduction des animations et n'utilise ni carrousel ni contenu qui bouge seul.
+  </p>
+
+  <h2>Comment nous le vérifions</h2>
+  <p>
+    Chaque modification du site est testée automatiquement sur toutes les pages avant publication. Ces
+    tests ne détectent qu'une partie des problèmes : nous complétons par des vérifications manuelles au
+    clavier et au lecteur d'écran. Le site n'a pas encore fait l'objet d'un audit externe.
+  </p>
+
+  <h2>Signaler un problème</h2>
+  <p>
+    Si un contenu vous est inaccessible, écrivez-nous à <a href={`mailto:${site.email}`}>{site.email}</a>.
+    Nous vous répondrons et vous fournirons l'information sous une autre forme si besoin.
+  </p>
+</Page>

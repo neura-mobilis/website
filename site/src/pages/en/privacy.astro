@@ -1,0 +1,46 @@
+---
+import Page from '../../layouts/Page.astro';
+import { site } from '../../data/site';
+---
+
+<Page
+  route="privacy"
+  title="Privacy policy"
+  heading="Privacy policy"
+  description="How the Neura Mobilis website handles your data: no cookies, no analytics, and only the e-mails you choose to send us."
+  lead="This website sets no cookies, does not track your browsing and has no forms. The only data we receive is what you send us by e-mail."
+>
+  <h2>Data controller</h2>
+  <p>{site.publisher}, for the Neura Mobilis project. Contact: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+
+  <h2>E-mails you send us</h2>
+  <ul>
+    <li><strong>What we receive</strong>: your e-mail address and the content of your message.</li>
+    <li><strong>Why</strong>: to answer you and, if you wish, organise your participation in the Mobilis test.</li>
+    <li><strong>Legal basis</strong>: your request, expressed by writing to us.</li>
+    <li><strong>How long</strong>: until the end of the test, then deleted, unless you ask us to keep you informed.</li>
+    <li><strong>Who can see it</strong>: only the Neura Mobilis team. We do not sell or share your data.</li>
+  </ul>
+  <p>
+    We do not ask for any information about your health. If you send us some, we do not keep it beyond
+    what is needed to answer you.
+  </p>
+
+  <h2>Website hosting</h2>
+  <p>
+    The website is hosted by {site.host.name}. To serve pages and protect the site, the host processes
+    technical data such as your IP address. This data may be processed outside the European Union, within
+    the framework provided by the GDPR.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    You can access your data, have it corrected or deleted, object to its processing or ask for its
+    restriction and portability by writing to <a href={`mailto:${site.email}`}>{site.email}</a>. You can
+    also lodge a complaint with the French data protection authority, the CNIL
+    (<a href="https://www.cnil.fr">cnil.fr</a>), or the authority of your country.
+  </p>
+
+  <h2>The Mobilis app</h2>
+  <p>This policy covers the website. The Mobilis app will have its own privacy policy.</p>
+</Page>

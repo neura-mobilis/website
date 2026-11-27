@@ -1,0 +1,103 @@
+---
+import { routes, toLocale, type RouteKey } from '../i18n/routes';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  route: RouteKey | null;
+}
+
+const { route } = Astro.props;
+const lang = toLocale(Astro.currentLocale);
+const t = ui[lang];
+const other = t.switchLang as 'fr' | 'en';
+const switchHref = route ? routes[route][other] : routes.home[other];
+const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
+  key,
+  href: routes[key][lang],
+  label: t[key],
+}));
+---
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href={routes.home[lang]} aria-label={t.home}>
+      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="currentColor"></rect><path d="M9 23V9l14 14V9" fill="none" stroke="var(--paper)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span>Neura Mobilis</span>
+    </a>
+    <nav aria-label={t.navLabel}>
+      <ul>
+        {
+          items.map((item) => (
+            <li>
+              <a href={item.href} aria-current={route === item.key ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a class="button" href={routes.tester[lang]} aria-current={route === 'tester' ? 'page' : undefined}>
+            {t.tester}
+          </a>
+        </li>
+        <li>
+          <a class="lang" href={switchHref} hreflang={other} lang={other}>{t.switchLabel}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .bar {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: 0.75rem var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1rem;
+  }
+  nav a:not(.button) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:not(.button):hover,
+  nav a[aria-current='page']:not(.button) {
+    border-bottom-color: var(--accent);
+  }
+  nav a[aria-current='page']:not(.button) {
+    font-weight: 600;
+  }
+  .lang {
+    font-size: 0.95rem;
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../data/site';
+---
+
+<Page route="legal" title="Mentions légales" heading="Mentions légales" description="Mentions légales du site Neura Mobilis : éditeur, directeur de la publication et hébergeur.">
+  <h2>Éditeur</h2>
+  <p>
+    Ce site est édité par {site.publisher}, pour le projet Neura Mobilis (société en cours de création).<br />
+    Contact : <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+
+  <h2>Directeur de la publication</h2>
+  <p>{site.publisher}</p>
+
+  <h2>Hébergeur</h2>
+  <p>
+    {site.host.name}, {site.host.address}<br />
+    <a href={site.host.url}>{site.host.url}</a>
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    Les textes et éléments graphiques de ce site appartiennent à Neura Mobilis, sauf mention contraire. Le
+    code source du site est public.
+  </p>
+</Page>

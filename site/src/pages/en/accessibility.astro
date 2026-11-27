@@ -1,0 +1,31 @@
+---
+import Page from '../../layouts/Page.astro';
+import { site } from '../../data/site';
+---
+
+<Page
+  route="accessibility"
+  title="Accessibility statement"
+  heading="Accessibility statement"
+  description="Accessibility commitment of the Neura Mobilis website: WCAG 2.2 level AA target, automated testing and a contact to report a problem."
+  lead="Our users often browse by voice, keyboard, switch access or screen reader. Accessibility on this website is not optional."
+>
+  <h2>Our goal</h2>
+  <p>
+    This website aims to conform to WCAG 2.2, level AA. It can be used entirely with a keyboard, respects
+    the reduced-motion preference and uses no carousel or self-moving content.
+  </p>
+
+  <h2>How we check it</h2>
+  <p>
+    Every change to the website is tested automatically on every page before it is published. These tests
+    only catch part of the problems: we add manual checks with a keyboard and a screen reader. The website
+    has not been audited externally yet.
+  </p>
+
+  <h2>Report a problem</h2>
+  <p>
+    If some content is not accessible to you, write to us at <a href={`mailto:${site.email}`}>{site.email}</a>.
+    We will answer and provide the information in another format if needed.
+  </p>
+</Page>
