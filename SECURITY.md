@@ -2,13 +2,16 @@
 
 ## Reporting a vulnerability
 
-Please do not open a public issue. E-mail the team at ethan.orain91@gmail.com with the details;
-we answer within 7 days.
+Please do not open a public issue. Use GitHub's private reporting instead:
+[Security → Report a vulnerability](https://github.com/neura-mobilis/website/security/advisories/new).
+Only the maintainers see the report; we answer within 7 days.
 
 ## Practices in this repository
 
-- No secrets in git: `.env*` files are ignored, a pre-commit hook and CI both run Gitleaks
-  (same pinned image, see ADR 0003).
+- No secrets in git, three layers (ADR 0003): a pre-commit hook and a required CI job run Gitleaks
+  (same pinned image), and GitHub secret scanning with push protection rejects known secret
+  formats at push time.
+- CodeQL (GitHub default setup) analyses the code and the workflows.
 - Dependencies: exact versions, `bun.lock` committed, versions younger than 7 days are refused
   (`site/bunfig.toml`), `bun audit` runs in CI, Dependabot opens weekly update PRs.
 - GitHub Actions are pinned to a commit SHA and run with least privilege; releases use a
