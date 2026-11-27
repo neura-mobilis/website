@@ -8,9 +8,6 @@ dist/
 .env*
 !.env.example
 
-# business documents with personal data (phones, e-mails of founders): never commit
-docs/private/
-
 # OS / editors
 .DS_Store
 .idea/

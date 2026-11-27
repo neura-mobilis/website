@@ -24,14 +24,17 @@ git config core.hooksPath .githooks   # blocks commits containing secrets (needs
 5. Release: when you want to ship, merge the open "chore(main): release site x.y.z" PR. It updates
    `site/CHANGELOG.md` and `site/package.json`, tags `site-vX.Y.Z` and creates the GitHub Release.
 
-## Release app (one-time, repository admin)
+## Release app (one-time, organization owner)
 Release PRs are opened by the "Neura Mobilis Release" GitHub App (ADR 0002). To (re)create it:
-1. GitHub → Settings → Developer settings → GitHub Apps → New GitHub App (under the company
-   organization once it exists). Webhook: off. Repository permissions: Contents read & write,
-   Pull requests read & write, Issues read & write. Installable: only on this account.
-2. Install it on this repository only.
-3. Repository → Settings → Environments → `release`: add variable `RELEASE_APP_CLIENT_ID`
-   (the app's Client ID) and secret `RELEASE_APP_PRIVATE_KEY` (generated private key, then delete
-   the downloaded file).
+1. github.com/organizations/neura-mobilis/settings/apps → New GitHub App.
+   - Homepage URL: https://github.com/neura-mobilis/website
+   - Webhook: uncheck "Active".
+   - Repository permissions: Contents read & write, Pull requests read & write, Issues read & write
+     (Metadata read-only is added automatically). No organization or account permissions.
+   - Where can this GitHub App be installed: Only on this account.
+2. On the app page: note the **Client ID**, then "Generate a private key" (downloads a `.pem`).
+3. Install App → neura-mobilis → Only select repositories → `website`.
+4. Repository → Settings → Environments → `release`: variable `RELEASE_APP_CLIENT_ID` = Client ID,
+   secret `RELEASE_APP_PRIVATE_KEY` = full content of the `.pem`. Then delete the `.pem` file.
 
-Reasons: `docs/decisions/` (0002 versioning, 0003 secret scanning).
+Reasons: `docs/decisions/` (0002 versioning, 0003 secret scanning, 0004 organization).

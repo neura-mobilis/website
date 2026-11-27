@@ -6,17 +6,15 @@ Student startup from aivancity, incubated at Entrepreneur District (2026-2027).
 Roadmap: (1) **Mobilis**, a voice assistant to fully control an Android phone, in testing;
 (2) non-invasive decoding of movement intent (EEG/EMG); (3) rehabilitation hardware, later.
 
-This repository holds the public website. Other building blocks (Mobilis app, decoding prototypes)
-live in their own repositories or will be added here as separate folders.
+This repository holds the public website. Each product lives in its own repository of the
+[neura-mobilis](https://github.com/neura-mobilis) organization; company documents are in a private one.
 
 ## Layout
 
 | Path | Content |
 | --- | --- |
 | `site/` | Public website: Astro (static), French + English, deployed to Cloudflare |
-| `docs/company/` | Pitch deck and presentation note (incubator application, Oct 2026) |
 | `docs/decisions/` | Architecture decision records (ADR) |
-| `docs/private/` | Local only, git-ignored: documents containing personal data |
 | `.github/` | CI (build, type check, dependency audit, secret scan, PR title), releases, Dependabot |
 | `release-please-config.json` | Versioning and changelog rules (see ADR 0002) |
 

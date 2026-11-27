@@ -19,8 +19,8 @@ It is a content site: pages to read, no user accounts, no data to store.
 - Static Astro site, French + English, deployed to Cloudflare (free tier, global CDN).
 - Bun as package manager, exact versions, 7-day minimum release age for new packages.
 - No backend, no cookies, no analytics for now: nothing to secure server-side and no consent banner.
-- Monorepo layout (`site/` + `docs/`) so later blocks (decoding prototype, ML pipelines) can sit next
-  to the site with shared CI and conventions.
+- One repository per product in the `neura-mobilis` organization (see ADR 0004); this one holds the
+  website only.
 
 ## Consequences
 - Pages are HTML at build time: fast, good Core Web Vitals, easy for search engines and AI crawlers.
