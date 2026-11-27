@@ -14,7 +14,8 @@ Only the maintainers see the report; we answer within 7 days.
 - CodeQL (GitHub default setup) analyses the code and the workflows.
 - Dependencies: exact versions, `bun.lock` committed, versions younger than 7 days are refused
   (`site/bunfig.toml`), `bun audit` runs in CI, Dependabot opens weekly update PRs.
-- GitHub Actions are pinned to a commit SHA and run with least privilege; releases use a
+- GitHub Actions: organization allow-list and mandatory SHA pinning (ADR 0005), least-privilege
+  tokens; releases use a
   dedicated GitHub App whose key is only available to `main` (ADR 0002).
 - `main` accepts changes only through pull requests with green CI, no bypass, admins included.
 - The website is static: no backend, no cookies, no analytics. Security headers (CSP, HSTS…) are
