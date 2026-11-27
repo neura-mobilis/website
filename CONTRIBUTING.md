@@ -37,4 +37,4 @@ Release PRs are opened by the "Neura Mobilis Release" GitHub App (ADR 0002). To 
 4. Repository → Settings → Environments → `release`: variable `RELEASE_APP_CLIENT_ID` = Client ID,
    secret `RELEASE_APP_PRIVATE_KEY` = full content of the `.pem`. Then delete the `.pem` file.
 
-Reasons: `docs/decisions/` (0002 versioning, 0003 secret scanning, 0004 organization).
+Reasons: `docs/decisions/` (0002 versioning, 0003 secret scanning, 0004 organization, 0005 Actions policy).
