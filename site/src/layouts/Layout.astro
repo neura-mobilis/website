@@ -1,13 +1,29 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { routes, toLocale, type RouteKey } from '../i18n/routes';
+import { ui } from '../i18n/ui';
+import { site } from '../data/site';
+
 interface Props {
   title: string;
   description: string;
+  route: RouteKey | null;
+  jsonLd?: object;
 }
 
-const { title, description } = Astro.props;
-const lang = Astro.currentLocale ?? 'fr';
+const { title, description, route, jsonLd } = Astro.props;
+const lang = toLocale(Astro.currentLocale);
+const t = ui[lang];
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const skipLabel = lang === 'fr' ? 'Aller au contenu' : 'Skip to content';
+const alternates = route
+  ? [
+      { hreflang: 'fr', href: new URL(routes[route].fr, Astro.site) },
+      { hreflang: 'en', href: new URL(routes[route].en, Astro.site) },
+      { hreflang: 'x-default', href: new URL(routes[route].fr, Astro.site) },
+    ]
+  : [];
+const fullTitle = route === 'home' ? title : `${title} | ${site.name}`;
 ---
 
 <!doctype html>
@@ -15,20 +31,28 @@ const skipLabel = lang === 'fr' ? 'Aller au contenu' : 'Skip to content';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="fr" href={new URL('/', Astro.site)} />
-    <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site)} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />
+    {route ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+    <meta name="theme-color" content="#14213d" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
-    <a class="skip-link" href="#main">{skipLabel}</a>
-    <main id="main">
+    <a class="skip-link" href="#main">{t.skip}</a>
+    <Header route={route} />
+    <main id="main" tabindex="-1">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
 
@@ -36,43 +60,134 @@ const skipLabel = lang === 'fr' ? 'Aller au contenu' : 'Skip to content';
   :root {
     color-scheme: light;
     --ink: #14213d;
-    --paper: #f5f5f2;
+    --ink-soft: #3d4a63;
+    --paper: #f6f5f1;
+    --surface: #ffffff;
+    --line: #d9d7cf;
     --accent: #177a68;
+    --accent-dark: #0f5c4e;
+    --accent-light: #8fd6c6;
+    --wide: 72rem;
+    --text: 42rem;
+    --gutter: clamp(1rem, 4vw, 2rem);
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
   }
   body {
     margin: 0;
-    font-family: system-ui, sans-serif;
-    line-height: 1.6;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
     color: var(--ink);
     background: var(--paper);
   }
-  main {
-    max-width: 65ch;
-    margin: 0 auto;
-    padding: 4rem 1rem;
+  main:focus {
+    outline: none;
+  }
+  h1,
+  h2,
+  h3 {
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 1rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  p,
+  li {
+    max-width: var(--text);
   }
   a {
-    color: var(--accent);
+    color: var(--accent-dark);
+    text-underline-offset: 0.15em;
   }
   :focus-visible {
     outline: 3px solid var(--accent);
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
   .skip-link {
     position: absolute;
     left: 1rem;
-    top: -3rem;
-    padding: 0.5rem 1rem;
+    top: -4rem;
+    z-index: 10;
+    padding: 0.75rem 1rem;
     background: var(--ink);
     color: var(--paper);
   }
   .skip-link:focus {
     top: 1rem;
   }
+  .section {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter);
+  }
+  .lead {
+    font-size: clamp(1.125rem, 2vw, 1.3rem);
+    color: var(--ink-soft);
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.5rem;
+    background: var(--accent-dark);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .button:hover {
+    background: var(--ink);
+  }
+  .button.secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+  }
+  .button.secondary:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .note {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .band {
+    background: var(--surface);
+    border-block: 1px solid var(--line);
+  }
+  .prose h2 {
+    margin-top: 2.5rem;
+  }
   @media (prefers-reduced-motion: reduce) {
     * {
       animation: none !important;
       transition: none !important;
+      scroll-behavior: auto !important;
     }
   }
 </style>

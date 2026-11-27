@@ -1,0 +1,61 @@
+---
+import Page from '../layouts/Page.astro';
+import { routes } from '../i18n/routes';
+---
+
+<Page
+  route="mobilis"
+  title="Mobilis : contrôler son téléphone à la voix"
+  heading="Mobilis : contrôler tout son téléphone à la voix"
+  description="Assistant vocal qui pilote tout votre téléphone et répond à l'oral, pour les personnes tétraplégiques et toute personne qui ne peut pas le manipuler."
+  lead="Vous parlez, Mobilis agit sur le téléphone puis vous répond à voix haute. Pas besoin de tenir l'appareil ni de regarder l'écran."
+>
+  <h2>Pour qui</h2>
+  <p>
+    Mobilis est pensé d'abord pour les personnes vivant avec une lésion de la moelle épinière, notamment
+    tétraplégiques. Il sert aussi à toute personne qui ne peut pas manipuler son téléphone : autres
+    atteintes motrices, personnes âgées, situations où les mains ne sont pas disponibles.
+  </p>
+
+  <h2>Comment ça marche</h2>
+  <ol>
+    <li>Vous lancez l'écoute et formulez votre demande avec vos mots, sans commande à apprendre par cœur.</li>
+    <li>Mobilis comprend la demande et agit sur le téléphone : ouvrir une application, écrire, appeler, chercher une information.</li>
+    <li>Mobilis vous répond à l'oral et vous dit ce qu'il a fait.</li>
+  </ol>
+
+  <h2>Ce qui le distingue des commandes vocales intégrées</h2>
+  <p>
+    Les téléphones proposent déjà des commandes vocales gratuites. Elles exécutent des commandes fixes, à
+    prononcer d'une façon précise. Mobilis comprend une demande formulée librement et vous donne
+    l'information à l'oral, au lieu de seulement exécuter une action.
+  </p>
+
+  <h2>Sur quels téléphones</h2>
+  <p>
+    Mobilis est en test sur Android. D'autres systèmes suivront. L'iPhone viendra en dernier : iOS limite
+    aujourd'hui le niveau de contrôle du téléphone dont Mobilis a besoin.
+  </p>
+
+  <h2>Vos données</h2>
+  <p>
+    L'essentiel de vos données reste stocké sur votre téléphone. Pour comprendre vos demandes, Mobilis
+    s'appuie aujourd'hui sur un modèle de langage d'un fournisseur externe : vos requêtes transitent donc
+    par ce service. Nous travaillons à passer sur un modèle hébergé de façon sécurisée, sous notre
+    contrôle. Nous ne collectons que les données nécessaires au service, et nous les anonymisons ou les
+    pseudonymisons lorsque c'est possible.
+  </p>
+  <p>
+    Mobilis est un outil d'accessibilité. Ce n'est pas un dispositif médical et il ne remplace aucun
+    soin ni aucune rééducation.
+  </p>
+
+  <h2>Où en est Mobilis</h2>
+  <p>
+    L'application fonctionne et est en test. Nous cherchons des testeurs pour l'améliorer avec les
+    personnes qui l'utiliseront au quotidien.
+  </p>
+  <div class="actions">
+    <a class="button" href={routes.tester.fr}>Devenir testeur</a>
+  </div>
+</Page>

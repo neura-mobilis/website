@@ -1,0 +1,27 @@
+---
+import Page from '../../layouts/Page.astro';
+import { site } from '../../data/site';
+---
+
+<Page route="legal" title="Legal notice" heading="Legal notice" description="Legal notice of the Neura Mobilis website: publisher, publication director and host.">
+  <h2>Publisher</h2>
+  <p>
+    This website is published by {site.publisher}, for the Neura Mobilis project (company being set up).<br />
+    Contact: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+
+  <h2>Publication director</h2>
+  <p>{site.publisher}</p>
+
+  <h2>Host</h2>
+  <p>
+    {site.host.name}, {site.host.address}<br />
+    <a href={site.host.url}>{site.host.url}</a>
+  </p>
+
+  <h2>Intellectual property</h2>
+  <p>
+    The texts and graphics of this website belong to Neura Mobilis unless stated otherwise. The source code
+    of the website is public.
+  </p>
+</Page>

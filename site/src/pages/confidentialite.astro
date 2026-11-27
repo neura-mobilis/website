@@ -1,0 +1,45 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../data/site';
+---
+
+<Page
+  route="privacy"
+  title="Politique de confidentialité"
+  heading="Politique de confidentialité"
+  description="Comment le site Neura Mobilis traite vos données : pas de cookies, pas de mesure d'audience, et uniquement les e-mails que vous choisissez de nous envoyer."
+  lead="Ce site ne dépose aucun cookie, ne mesure pas votre navigation et ne contient aucun formulaire. Les seules données que nous recevons sont celles que vous nous envoyez par e-mail."
+>
+  <h2>Responsable du traitement</h2>
+  <p>{site.publisher}, pour le projet Neura Mobilis. Contact : <a href={`mailto:${site.email}`}>{site.email}</a></p>
+
+  <h2>Les e-mails que vous nous envoyez</h2>
+  <ul>
+    <li><strong>Ce que nous recevons</strong> : votre adresse e-mail et le contenu de votre message.</li>
+    <li><strong>Pourquoi</strong> : vous répondre et, si vous le souhaitez, organiser votre participation au test de Mobilis.</li>
+    <li><strong>Base légale</strong> : votre demande, que vous exprimez en nous écrivant.</li>
+    <li><strong>Durée</strong> : jusqu'à la fin du test, puis suppression, sauf si vous nous demandez de rester informé.</li>
+    <li><strong>Qui y a accès</strong> : uniquement l'équipe de Neura Mobilis. Nous ne vendons ni ne partageons vos données.</li>
+  </ul>
+  <p>
+    Nous ne vous demandons aucune information sur votre santé. Si vous nous en transmettez, nous ne la
+    conservons pas au-delà de ce qui est nécessaire pour vous répondre.
+  </p>
+
+  <h2>Hébergement du site</h2>
+  <p>
+    Le site est hébergé par {site.host.name}. Pour vous afficher les pages et protéger le site, l'hébergeur
+    traite des données techniques comme votre adresse IP. Ces données peuvent être traitées hors de l'Union
+    européenne, dans le cadre prévu par le RGPD.
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>
+    Vous pouvez accéder à vos données, les faire corriger ou supprimer, vous opposer à leur traitement ou en
+    demander la limitation et la portabilité, en écrivant à <a href={`mailto:${site.email}`}>{site.email}</a>.
+    Vous pouvez aussi adresser une réclamation à la CNIL (<a href="https://www.cnil.fr">cnil.fr</a>).
+  </p>
+
+  <h2>L'application Mobilis</h2>
+  <p>Cette politique concerne le site. L'application Mobilis aura sa propre politique de confidentialité.</p>
+</Page>

@@ -1,0 +1,38 @@
+import type { Locale } from './routes';
+
+export const ui = {
+  fr: {
+    skip: 'Aller au contenu',
+    navLabel: 'Navigation principale',
+    home: 'Accueil Neura Mobilis',
+    mobilis: 'Mobilis',
+    approach: 'Notre approche',
+    about: 'À propos',
+    tester: 'Devenir testeur',
+    switchLabel: 'English',
+    switchLang: 'en',
+    footerLabel: 'Liens du site',
+    contact: 'Contact',
+    legal: 'Mentions légales',
+    privacy: 'Confidentialité',
+    accessibility: 'Accessibilité',
+    footerNote: 'Une start-up étudiante qui développe des IA pour redonner autonomie et mobilité.',
+  },
+  en: {
+    skip: 'Skip to content',
+    navLabel: 'Main navigation',
+    home: 'Neura Mobilis home',
+    mobilis: 'Mobilis',
+    approach: 'Our approach',
+    about: 'About',
+    tester: 'Become a tester',
+    switchLabel: 'Français',
+    switchLang: 'fr',
+    footerLabel: 'Site links',
+    contact: 'Contact',
+    legal: 'Legal notice',
+    privacy: 'Privacy',
+    accessibility: 'Accessibility',
+    footerNote: 'A student start-up building AI that restores autonomy and mobility.',
+  },
+} as const satisfies Record<Locale, Record<string, string>>;

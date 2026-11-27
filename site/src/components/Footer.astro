@@ -1,0 +1,70 @@
+---
+import { routes, toLocale } from '../i18n/routes';
+import { ui } from '../i18n/ui';
+import { site } from '../data/site';
+
+const lang = toLocale(Astro.currentLocale);
+const t = ui[lang];
+const pages = (['mobilis', 'approach', 'about', 'tester'] as const).map((key) => ({ href: routes[key][lang], label: t[key] }));
+const legal = (['legal', 'privacy', 'accessibility'] as const).map((key) => ({ href: routes[key][lang], label: t[key] }));
+---
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <p class="name">Neura Mobilis</p>
+      <p>{t.footerNote}</p>
+      <p>{t.contact} : <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+    <nav aria-label={t.footerLabel}>
+      <ul>{pages.map((p) => <li><a href={p.href}>{p.label}</a></li>)}</ul>
+      <ul>{legal.map((p) => <li><a href={p.href}>{p.label}</a></li>)}</ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 4rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .inner {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding: 2.5rem var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem 4rem;
+    justify-content: space-between;
+  }
+  .inner > div {
+    max-width: 38ch;
+  }
+  .name {
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+  p {
+    margin: 0 0 0.75rem;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 3rem;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: var(--paper);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .site-footer :focus-visible {
+    outline-color: var(--accent-light);
+  }
+</style>

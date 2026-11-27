@@ -1,0 +1,36 @@
+---
+import Page from '../layouts/Page.astro';
+import { routes } from '../i18n/routes';
+---
+
+<Page
+  route="about"
+  title="À propos"
+  heading="À propos"
+  description="Neura Mobilis, start-up fondée par quatre étudiants en IA, développe des IA pour redonner autonomie et mobilité aux personnes blessées médullaires."
+  lead="Quatre étudiants en intelligence artificielle, associés à parts égales, réunis par une même idée : utiliser l'IA pour redonner de l'autonomie."
+>
+  <h2>Pourquoi nous faisons cela</h2>
+  <p>
+    Une lésion de la moelle épinière touche souvent des personnes jeunes. Grâce à la plasticité du
+    système nerveux, des capacités de récupération existent encore un à deux ans après l'accident. Mais
+    les équipements de pointe sont chers, rares et disponibles sur des temps courts, dans quelques centres
+    seulement.
+  </p>
+
+  <h2>Comment nous travaillons</h2>
+  <p>
+    Nous avons commencé par écouter. L'équipe d'un centre de rééducation, dont une kinésithérapeute, et
+    deux personnes tétraplégiques nous ont décrit leur quotidien et les limites des solutions actuelles.
+    Mobilis est né de ces échanges, et nos testeurs décident de la suite.
+  </p>
+  <p>
+    Le projet est accompagné par l'incubateur de notre école. La société est en cours de création.
+  </p>
+
+  <h2>Nous écrire</h2>
+  <p>
+    Pour tester Mobilis, collaborer avec nous ou simplement en savoir plus :{' '}
+    <a href={routes.tester.fr}>devenir testeur</a> ou nous écrire à l'adresse indiquée en bas de page.
+  </p>
+</Page>

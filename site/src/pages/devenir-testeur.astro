@@ -1,0 +1,44 @@
+---
+import Page from '../layouts/Page.astro';
+import { routes } from '../i18n/routes';
+import { site } from '../data/site';
+
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Devenir testeur de Mobilis')}`;
+---
+
+<Page
+  route="tester"
+  title="Devenir testeur de Mobilis"
+  heading="Devenir testeur de Mobilis"
+  description="Testez Mobilis, l'assistant vocal qui pilote votre téléphone Android à la voix, et aidez-nous à l'améliorer. Pour les personnes blessées médullaires."
+  lead="Nous cherchons des personnes qui vivent avec une lésion médullaire, ou qui ne peuvent pas manipuler leur téléphone, pour utiliser Mobilis au quotidien et nous dire ce qui marche et ce qui bloque."
+>
+  <h2>Qui peut tester</h2>
+  <ul>
+    <li>Vous vivez avec une lésion de la moelle épinière, ou une autre difficulté à manipuler votre téléphone.</li>
+    <li>Vous avez un téléphone Android. Mobilis n'est pas encore disponible sur iPhone.</li>
+    <li>Vous pouvez aussi nous écrire pour un proche, avec son accord.</li>
+  </ul>
+
+  <h2>Ce que cela demande</h2>
+  <ol>
+    <li>Installer la version de test de Mobilis, avec notre aide si besoin.</li>
+    <li>L'utiliser dans votre quotidien.</li>
+    <li>Nous dire ce qui fonctionne, ce qui vous gêne et ce qui vous manque.</li>
+  </ol>
+  <p>Nous vous expliquons les conditions du test avant tout engagement. Vous pouvez arrêter quand vous voulez.</p>
+
+  <h2>Nous écrire</h2>
+  <p>
+    Envoyez-nous un e-mail avec simplement votre prénom et le modèle de votre téléphone.{' '}
+    <strong>Inutile de nous décrire votre état de santé</strong> : nous n'en avons pas besoin pour vous répondre.
+  </p>
+  <div class="actions">
+    <a class="button" href={mailto}>Écrire à l'équipe</a>
+  </div>
+  <p>Ou directement à l'adresse : <a href={mailto}>{site.email}</a></p>
+  <p class="note">
+    Nous utilisons votre adresse uniquement pour vous répondre et organiser le test.{' '}
+    <a href={routes.privacy.fr}>Comment nous traitons vos données</a>.
+  </p>
+</Page>

@@ -1,0 +1,60 @@
+---
+import Page from '../../layouts/Page.astro';
+import { routes } from '../../i18n/routes';
+---
+
+<Page
+  route="mobilis"
+  title="Mobilis: control your phone by voice"
+  heading="Mobilis: control your whole phone by voice"
+  description="A voice assistant that operates your whole phone and answers out loud, for people with tetraplegia and anyone who cannot handle their phone."
+  lead="You speak, Mobilis acts on the phone, then answers out loud. No need to hold the device or look at the screen."
+>
+  <h2>Who it is for</h2>
+  <p>
+    Mobilis is designed first for people living with a spinal cord injury, especially tetraplegia. It
+    also serves anyone who cannot handle their phone: other motor impairments, older people, situations
+    where your hands are not free.
+  </p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li>You start listening and say what you need in your own words, with no commands to memorise.</li>
+    <li>Mobilis understands the request and acts on the phone: open an app, write, call, look something up.</li>
+    <li>Mobilis answers out loud and tells you what it did.</li>
+  </ol>
+
+  <h2>How it differs from built-in voice commands</h2>
+  <p>
+    Phones already offer free voice commands. They run fixed commands that must be said in a precise way.
+    Mobilis understands a request phrased freely and gives you the information out loud, instead of only
+    running an action.
+  </p>
+
+  <h2>Which phones</h2>
+  <p>
+    Mobilis is in testing on Android. Other systems will follow. iPhone will come last: iOS currently
+    restricts the level of phone control Mobilis needs.
+  </p>
+
+  <h2>Your data</h2>
+  <p>
+    Most of your data stays stored on your phone. To understand your requests, Mobilis currently relies
+    on a language model from an external provider, so your requests pass through that service. We are
+    working on moving to a securely hosted model under our control. We only collect the data the service
+    needs, and we anonymise or pseudonymise it whenever possible.
+  </p>
+  <p>
+    Mobilis is an accessibility tool. It is not a medical device and does not replace any care or
+    rehabilitation.
+  </p>
+
+  <h2>Where Mobilis stands</h2>
+  <p>
+    The app works and is in testing. We are looking for testers to improve it with the people who will
+    use it every day.
+  </p>
+  <div class="actions">
+    <a class="button" href={routes.tester.en}>Become a tester</a>
+  </div>
+</Page>

@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // TODO: replace with the real domain once purchased
 export default defineConfig({
-  site: 'https://neuramobilis.com',
+  site: 'https://neura-mobilis.com',
+  trailingSlash: 'always',
   i18n: {
     locales: ['fr', 'en'],
     defaultLocale: 'fr',

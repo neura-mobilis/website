@@ -18,7 +18,10 @@ usually cloned next to this one as `../company`. This repo is public: nothing in
 - Claims: only what the company documents state. Mobilis is "in testing" on Android; decoding is an idea;
   hardware is long term. Never invent users, partners, results, medical claims or testimonials.
   Mobilis is an accessibility tool, not a medical device: never write medical promises.
-- Domain `neuramobilis.com` is a placeholder until bought.
+- Domain `neura-mobilis.com` and `contact@neura-mobilis.com` are placeholders until bought (`site/src/data/site.ts`).
+- Never name people or organizations (partners, centres, team members) on the site without their written consent.
+  The only person named is the publisher, as French law requires (legal notice, privacy policy).
+- Pages and slugs live in `site/src/i18n/routes.ts`; every page exists in French and English.
 
 ## Rules
 
