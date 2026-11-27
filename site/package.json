@@ -11,7 +11,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "test:a11y": "playwright test"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.6",
@@ -19,6 +20,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "typescript": "6"
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.1",
+    "@types/bun": "1.4.5",
+    "typescript": "6.0.3"
   }
 }

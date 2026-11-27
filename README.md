@@ -15,7 +15,7 @@ This repository holds the public website. Each product lives in its own reposito
 | --- | --- |
 | `site/` | Public website: Astro (static), French + English, deployed to Cloudflare |
 | `docs/decisions/` | Architecture decision records (ADR) |
-| `.github/` | CI (build, type check, dependency audit, secret scan, PR title), releases, Dependabot |
+| `.github/` | CI (build, type check, accessibility, dependency audit, secret scan, PR title), releases, Dependabot |
 | `release-please-config.json` | Versioning and changelog rules (see ADR 0002) |
 
 ## Run the site
@@ -28,6 +28,7 @@ bun install
 bun run dev      # http://localhost:4321
 bun run check    # type check
 bun run build    # static output in site/dist
+bun run test:a11y  # WCAG 2.2 A/AA + keyboard checks on every built page (needs a build)
 ```
 
 ## Working rules
