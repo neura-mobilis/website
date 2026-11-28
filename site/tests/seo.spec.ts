@@ -26,6 +26,9 @@ for (const route of pages) {
     const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
     expect(new URL(canonical!).pathname).toBe(route);
 
+    const ogImage = await page.locator('meta[property="og:image"]').getAttribute('content');
+    expect((await page.request.get(new URL(ogImage!).pathname)).ok(), 'og:image is served').toBe(true);
+
     // fr, en and x-default alternates, each pointing to a page that exists.
     const alternates = await page.locator('link[rel="alternate"][hreflang]').evaluateAll((links) =>
       links.map((l) => [l.getAttribute('hreflang'), l.getAttribute('href')]),

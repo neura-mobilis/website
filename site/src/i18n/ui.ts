@@ -18,6 +18,7 @@ export const ui = {
     legal: 'Mentions légales',
     privacy: 'Confidentialité',
     accessibility: 'Accessibilité',
+    ogAlt: 'Neura Mobilis : votre téléphone, à la voix, sans avoir à le tenir.',
     footerNote: 'Une start-up étudiante qui développe des IA pour redonner autonomie et mobilité.',
   },
   en: {
@@ -37,6 +38,7 @@ export const ui = {
     legal: 'Legal notice',
     privacy: 'Privacy',
     accessibility: 'Accessibility',
+    ogAlt: 'Neura Mobilis: your phone, by voice, without having to hold it.',
     footerNote: 'A student start-up building AI that restores autonomy and mobility.',
   },
 } as const satisfies Record<Locale, Record<string, string>>;

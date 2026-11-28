@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
-    "test:a11y": "playwright test"
+    "test:a11y": "playwright test",
+    "og": "bun scripts/og-image.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.6",
