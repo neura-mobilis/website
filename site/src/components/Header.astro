@@ -18,14 +18,18 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
 }));
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="bar">
     <a class="brand" href={routes.home[lang]} aria-label={t.home}>
       <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="var(--accent-strong)"></circle><path d="M10 22V10l12 12V10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       <span>Neura Mobilis</span>
     </a>
-    <nav aria-label={t.navLabel}>
-      <ul>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="open-icon" d="M4 7h16M4 12h16M4 17h16"></path><path class="close-icon" d="M6 6l12 12M18 6 6 18"></path></svg>
+      {t.menu}
+    </button>
+    <nav id="site-menu" aria-label={t.navLabel}>
+      <ul class="links">
         {
           items.map((item) => (
             <li>
@@ -35,19 +39,21 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
             </li>
           ))
         }
+      </ul>
+      <ul class="tools">
+        <li>
+          <a class="lang" href={switchHref} hreflang={other} lang={other} title={t.switchLabel}>{other.toUpperCase()}<span class="visually-hidden"> – {t.switchLabel}</span></a>
+        </li>
+        <li>
+          <button type="button" class="theme" aria-pressed="false" aria-label={t.darkTheme} title={t.darkTheme} hidden data-theme-toggle>
+            <svg class="moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg>
+            <svg class="sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+          </button>
+        </li>
         <li>
           <a class="button" href={routes.tester[lang]} aria-current={route === 'tester' ? 'page' : undefined}>
             {t.tester}
           </a>
-        </li>
-        <li>
-          <a class="lang" href={switchHref} hreflang={other} lang={other}>{t.switchLabel}</a>
-        </li>
-        <li>
-          <button type="button" class="theme" aria-pressed="false" hidden data-theme-toggle>
-            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg>
-            <span>{t.darkTheme}</span>
-          </button>
         </li>
       </ul>
     </nav>
@@ -55,6 +61,23 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  if (header && menuBtn) {
+    const setOpen = (open: boolean) => {
+      header.dataset.menu = open ? 'open' : 'closed';
+      menuBtn.setAttribute('aria-expanded', String(open));
+    };
+    setOpen(false);
+    menuBtn.addEventListener('click', () => setOpen(header.dataset.menu !== 'open'));
+    header.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && header.dataset.menu === 'open') {
+        setOpen(false);
+        menuBtn.focus();
+      }
+    });
+  }
+
   const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
   if (btn) {
     const root = document.documentElement;
@@ -66,10 +89,14 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
     media.addEventListener('change', render);
     btn.addEventListener('click', () => {
       const next = current() === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = next;
+      const system = media.matches ? 'dark' : 'light';
+      // Choosing the system theme drops the override, so the site follows the system again.
       try {
-        localStorage.setItem('theme', next);
+        if (next === system) localStorage.removeItem('theme');
+        else localStorage.setItem('theme', next);
       } catch {}
+      if (next === system) delete root.dataset.theme;
+      else root.dataset.theme = next;
       render();
     });
   }
@@ -99,19 +126,6 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
       top: 0;
     }
   }
-  @media (max-width: 40rem) {
-    .theme span {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip-path: inset(50%);
-      white-space: nowrap;
-    }
-    .theme {
-      padding: 0.3rem 0.65rem;
-    }
-  }
   .brand {
     display: inline-flex;
     align-items: center;
@@ -122,6 +136,12 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
     font-size: 1.2rem;
     letter-spacing: -0.01em;
     text-decoration: none;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.75rem;
   }
   ul {
     list-style: none;
@@ -147,29 +167,87 @@ const items = (['mobilis', 'approach', 'about'] as const).map((key) => ({
   nav a[aria-current='page']:not(.button) {
     font-weight: 600;
   }
-  .lang {
-    font-size: 0.95rem;
-  }
-  .theme {
-    display: inline-flex;
+  .menu-toggle {
+    display: none;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
     min-height: 44px;
-    padding: 0.3rem 0.8rem;
+    padding: 0.3rem 1rem 0.3rem 0.8rem;
     border-radius: 999px;
     border: 1.5px solid var(--line-strong);
     background: transparent;
     color: var(--ink);
     font: inherit;
-    font-size: 0.95rem;
+    font-weight: 700;
     cursor: pointer;
   }
-  .theme[hidden] {
+  .menu-toggle .close-icon,
+  [data-menu='open'] .menu-toggle .open-icon {
     display: none;
   }
-  .theme[aria-pressed='true'] {
-    background: var(--ink);
-    color: var(--bg);
+  [data-menu='open'] .menu-toggle .close-icon {
+    display: inline;
+  }
+  /* Below this width the links sit behind the Menu button; without JS they stay visible. */
+  @media (max-width: 59.99rem) {
+    [data-menu] .menu-toggle {
+      display: inline-flex;
+    }
+    [data-menu='closed'] nav {
+      display: none;
+    }
+    [data-menu] nav {
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      padding-block: 0.25rem 0.75rem;
+    }
+    [data-menu] .links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    [data-menu] .links li {
+      max-width: none;
+      border-bottom: 1px solid var(--line);
+    }
+    [data-menu] .tools {
+      gap: 0.75rem;
+      padding-top: 0.75rem;
+    }
+  }
+  /* Same round control as the theme toggle; shows the language it switches to. */
+  nav a.lang {
+    justify-content: center;
+    width: 44px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s var(--ease);
+  }
+  nav a.lang:hover {
     border-color: var(--ink);
+  }
+  .theme {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.2s var(--ease);
+  }
+  .theme:hover {
+    border-color: var(--ink);
+  }
+  .theme[hidden],
+  .theme[aria-pressed='true'] .moon,
+  .theme[aria-pressed='false'] .sun {
+    display: none;
   }
 </style>

@@ -9,6 +9,7 @@ export const ui = {
     approach: 'Notre approche',
     about: 'À propos',
     tester: 'Devenir testeur',
+    menu: 'Menu',
     switchLabel: 'English',
     darkTheme: 'Thème sombre',
     switchLang: 'en',
@@ -17,6 +18,7 @@ export const ui = {
     legal: 'Mentions légales',
     privacy: 'Confidentialité',
     accessibility: 'Accessibilité',
+    ogAlt: 'Neura Mobilis : votre téléphone, à la voix, sans avoir à le tenir.',
     footerNote: 'Une start-up étudiante qui développe des IA pour redonner autonomie et mobilité.',
   },
   en: {
@@ -27,6 +29,7 @@ export const ui = {
     approach: 'Our approach',
     about: 'About',
     tester: 'Become a tester',
+    menu: 'Menu',
     switchLabel: 'Français',
     darkTheme: 'Dark theme',
     switchLang: 'fr',
@@ -35,6 +38,7 @@ export const ui = {
     legal: 'Legal notice',
     privacy: 'Privacy',
     accessibility: 'Accessibility',
+    ogAlt: 'Neura Mobilis: your phone, by voice, without having to hold it.',
     footerNote: 'A student start-up building AI that restores autonomy and mobility.',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
