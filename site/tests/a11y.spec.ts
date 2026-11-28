@@ -54,10 +54,27 @@ test.describe('phone demo', () => {
 
 test('theme toggle switches and persists', async ({ page }) => {
   await page.goto('/');
+  // On narrow screens the toggle sits behind the Menu button.
+  const menu = page.locator('[data-menu-toggle]');
+  if (await menu.isVisible()) await menu.click();
   const toggle = page.locator('[data-theme-toggle]');
   const before = await toggle.getAttribute('aria-pressed');
   await toggle.click();
   await expect(toggle).not.toHaveAttribute('aria-pressed', before!);
   await page.goto('/mobilis/');
   await expect(page.locator('[data-theme-toggle]')).not.toHaveAttribute('aria-pressed', before!);
+});
+
+test('menu opens on narrow screens and Escape closes it', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto('/');
+  const toggle = page.locator('[data-menu-toggle]');
+  const menu = page.locator('#site-menu');
+  await expect(menu).toBeHidden();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(menu.getByRole('link', { name: 'Mobilis', exact: true })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+  await expect(toggle).toBeFocused();
 });
